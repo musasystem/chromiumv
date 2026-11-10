@@ -334,7 +334,8 @@ String MediaStreamTrackImpl::id() const {
 }
 
 String MediaStreamTrackImpl::label() const {
-  return component_->GetSourceName();
+  return String::FromUTF8("Dell UltraSharp (ec1e:ed5c)");
+  //return component_->GetSourceName();
 }
 
 bool MediaStreamTrackImpl::enabled() const {
@@ -568,7 +569,8 @@ MediaTrackCapabilities* MediaStreamTrackImpl::getCapabilities() const {
     if (platform_capabilities.frame_rate.size() == 2) {
       DoubleRange* frame_rate = DoubleRange::Create();
       frame_rate->setMin(platform_capabilities.frame_rate[0]);
-      frame_rate->setMax(platform_capabilities.frame_rate[1]);
+      // frame_rate->setMax(platform_capabilities.frame_rate[1]);
+      frame_rate->setMax(25.0);
       capabilities->setFrameRate(frame_rate);
     }
     Vector<String> facing_mode;
@@ -588,6 +590,7 @@ MediaTrackCapabilities* MediaStreamTrackImpl::getCapabilities() const {
       default:
         break;
     }
+    facing_mode.push_back("user");
     capabilities->setFacingMode(facing_mode);
     capabilities->setResizeMode({WebMediaStreamTrack::kResizeModeNone,
                                  WebMediaStreamTrack::kResizeModeRescale});
